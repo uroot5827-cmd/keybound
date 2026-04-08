@@ -1,0 +1,38 @@
+# Lefthook 配置
+# https://lefthook.dev/configuration/
+
+colors: true
+
+# 提交前钩子
+pre-commit:
+    parallel: false
+    jobs:
+        - name: Oxfmt
+          glob: '*.{ts,js,json,md,yml,yaml}'
+          run: pnpm exec oxfmt --config .config/format/oxfmt.json --write {staged_files}
+          fail_text: '代码格式化失败'
+          stage_fixed: true
+
+        - name: ESLint
+          glob: '*.{ts,js}'
+          run: pnpm exec eslint -c .config/lint/eslint.config.ts --fix --no-warn-ignored --max-warnings=-1 {staged_files}
+          fail_text: 'ESLint 检查失败，请修复错误后重新提交'
+          stage_fixed: true
+
+# 提交信息验证钩子
+commit-msg:
+    jobs:
+        - name: Commit message validation
+          run: pnpm commitlint --config .config/git/commitlint.config.js --edit {1}
+          fail_text: '提交信息格式不符合规范，请参考 Conventional Commits 规范'
+
+# 推送前钩子
+pre-push:
+    jobs:
+        - name: Type check
+          run: pnpm check:types
+          fail_text: 'TypeScript 类型检查失败'
+
+        - name: Run tests
+          run: pnpm test:run
+          fail_text: '测试未通过，请修复后重试'

@@ -1,0 +1,28 @@
+{
+    "name": "@keybound/core",
+    "version": "0.0.1",
+    "description": "Framework-agnostic keyboard shortcut engine",
+    "files": [
+        "dist"
+    ],
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    },
+    "scripts": {
+        "check:types": "tsc --noEmit",
+        "build": "tsup",
+        "test": "vitest",
+        "test:run": "vitest run"
+    },
+    "devDependencies": {
+        "tsup": "^8.0.0",
+        "vitest": "^2.0.0"
+    }
+}
