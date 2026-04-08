@@ -50,18 +50,9 @@ export default [
             parser: tsparser,
             parserOptions: {
                 project: true,
-            },
-        },
-    },
-
-    // 全局插件设置
-    {
-        name: 'app/settings',
-        settings: {
-            'import/resolver': {
-                typescript: {
-                    alwaysTryTypes: true,
-                },
+                tsconfigRootDir: fileURLToPath(
+                    new URL('../..', import.meta.url),
+                ),
             },
         },
     },
