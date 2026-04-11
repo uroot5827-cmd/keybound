@@ -38,6 +38,7 @@ export type {
     BindOptions,
     KeyBinding,
     SequenceBinding,
+    SequenceManager,
     HandlerChainNode,
     EngineConfig,
 } from './types'
@@ -45,6 +46,7 @@ export type {
 // 常量
 export {
     MODIFIER_ORDER,
+    WILDCARD,
     DEFAULT_SEQUENCE_TIMEOUT,
     DEFAULT_CANCEL_KEY,
 } from './types'
